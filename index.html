@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+   
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="theme-color" content="#120c08" />
+
+    <title>The Friends Cafe</title>
+
+    <style>
+
+html{
+scroll-behavior:smooth;
+}
+
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        margin: 0;
+        font-family: Poppins, Arial;
+        background: #120c08;
+        color: #f5efe9;
+      }
+      h1 {
+        text-align: center;
+        color: #ffcf9f;
+      }
+
+      .insta-box {
+        position: fixed;
+        top: 8px;
+        right: 8px;
+        background: #ffd6e7;
+        padding: 6px 10px;
+        border-radius: 12px;
+        z-index: 50;
+      }
+      .insta-box a {
+        text-decoration: none;
+        color: #120c08;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .cat {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding: 8px;
+        position: sticky;
+        top: 0;
+        background: #120c08;
+        z-index: 20;
+      }
+      .cat button {
+        background: #2b1d16;
+        color: #ffcf9f;
+        border: 0;
+        padding: 6px 14px;
+        border-radius: 20px;
+        white-space: nowrap;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+
+      #welcome {
+        text-align: center;
+        margin-top: 50px;
+        opacity: 0.85;
+      }
+      #welcome h2 {
+        color: #ffcf9f;
+      }
+
+      .sec {
+        display: none;
+        margin: 16px auto;
+        max-width: 980px;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 14px;
+        border-radius: 14px;
+      }
+      .sec.active {
+        display: block;
+      }
+
+      .t {
+        color: #ffcf9f;
+        border-bottom: 1px dashed #555;
+        margin-bottom: 10px;
+      }
+      .i {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px dotted #444;
+        flex-wrap: wrap;
+        gap: 6px;
+        font-size: 14px;
+      }
+      .q {
+        display: flex;
+        gap: 6px;
+      }
+      .q button {
+        border: 0;
+        background: #ffcf9f;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+
+      .cart {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        background: #ffcf9f;
+        color: #120c08;
+        padding: 12px;
+        border-radius: 12px;
+        min-width: 160px;
+        box-shadow:0 8px 25px rgba(0,0,0,.35);
+      }
+      .cart button {
+        width: 100%;
+        margin-top: 6px;
+        border: 0;
+        padding: 8px;
+        border-radius: 8px;
+        font-weight: bold;
+      }
+      .cart .wa {
+        background: #120c08;
+        color: #ffcf9f;
+      }
+      .cart .surprise {
+        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        color: #fff;
+      }
+
+      @media (max-width: 600px) {
+        .cart {
+          left: 10px;
+          right: 10px;
+          bottom: 8px;
+          min-width: auto;
+          font-size: 14px;
+        }
+      }
+
+      @media(max-width:380px){
+  .i{
+    font-size:13px;
+  }
+  .cat button{
+    font-size:12px;
+    padding:6px 10px;
+  }
+}
+
+
+      select {
+        padding: 8px 14px;
+        border-radius: 20px;
+        background: #2b1d16;
+        color: #ffcf9f;
+        border: 1px solid #ffcf9f;
+      }
+
+      #welcome {
+        padding: 10px;
+      }
+      #welcome p {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .sec {
+        width: 95%;
+      }
+
+.cat button.active {
+  background: #ffcf9f;
+  color: #120c08;
+  font-weight: 600;
+}
+
+
+    </style>
+  </head>
+
+  <body>
+    <div class="insta-box">
+      <a href="https://www.instagram.com/thefriendscafe23/" target="_blank">
+        📸 @thefriendscafe23
+      </a>
+    </div>
+
+    <h1>☕ The Friends Cafe</h1>
+
+    <div style="text-align: center">
+      <select id="table">
+        <option value="">Select Table</option>
+        <option>Table 1</option>
+        <option>Table 2</option>
+        <option>Table 3</option>
+        <option>Table 4</option>
+        <option>Table 5</option>
+        <option>Take Away</option>
+      </select>
+    </div>
+
+    <div class="cat" id="cat"></div>
+
+    <div id="welcome">
+      <h1>🙏 Welcome to TFC ☕</h1>
+      <p>🙂 Please select a category</p>
+      <h2>made by V.S rathore</h2>
+      <p>
+        Hey! 🎉 I make small private web pages to surprise friends/family.
+        Birthday / Love / Sorry / Congrats 🎂❤️ Want me to make one for you?
+        Reply YES!
+      </p>
+    </div>
+
+    <div id="menu"></div>
+
+    <div class="cart">
+      <div id="total">₹0</div>
+      <button class="wa" onclick="wa()">Send WhatsApp</button>
+      <button class="surprise" onclick="surprise()">🎁 Surprise</button>
+      <div id="cartItems" style="font-size:12px;max-height:80px;overflow:auto;"></div>
+
+    </div>
+
+    <script>
+      /* 🔔 sound + vibration */
+      const beep = new Audio(
+        "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA="
+      );
+      function alertUser() {
+        beep.currentTime = 0;
+        beep.play().catch(() => {});
+        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+      }
+
+      /* 🔥 FULL COMPLETE MENU */
+      const MENU = [
+        [
+          "🍜 Manchurian",
+          [
+            ["Dry Manchurian", 99],
+            ["Gravy Manchurian", 109],
+            ["Paneer Manchurian", 149],
+            ["Rice Manchurian", 139],
+          ],
+        ],
+        [
+          "🍚 Rice",
+          [
+            ["Fried Rice", 99],
+            ["Paneer Fried Rice", 149],
+            ["Chilli Garlic Rice", 109],
+            ["Singapuri Rice", 129],
+            ["Hakka Rice", 109],
+          ],
+        ],
+        [
+          "🍝 Noodles",
+          [
+            ["Veg Noodles", 89],
+            ["Singapuri Noodles", 99],
+            ["Butter Noodles", 109],
+            ["Paneer Noodles", 149],
+            ["Hakka Noodles", 99],
+            ["Chilli Garlic Noodles", 109],
+          ],
+        ],
+        [
+          "🥔 Potato",
+          [
+            ["Chilli Potato", 99],
+            ["Honey Chilli Potato", 109],
+          ],
+        ],
+        [
+          "🥟 Momos",
+          [
+            ["Steam Momos", 69],
+            ["Fried Momos", 79],
+            ["Peri Peri Momos", 89],
+            ["Crunchy Momos", 89],
+            ["Paneer Momos", 99],
+          ],
+        ],
+        [
+          "🌯 Rolls",
+          [
+            ["Spring Roll", 89],
+            ["Crunchy Roll", 99],
+          ],
+        ],
+        [
+          "🧀 Paneer Special",
+          [
+            ["Paneer 65", 119],
+            ["Paneer Maggi", 89],
+            ["Paneer Cheese Sandwich", 79],
+            ["Chilli Paneer", 189],
+            ["Honey Chilli Paneer", 199],
+            ["Paneer Pizza", 219],
+          ],
+        ],
+        [
+          "🍕 Pizza Slice",
+          [
+            ["Margherita", 89],
+            ["Cheese", 99],
+            ["OTC", 129],
+            ["Onion", 139],
+            ["Corn & Cheese", 149],
+            ["Double Cheese", 149],
+            ["Makhani", 179],
+            ["Peri Peri", 179],
+            ["Tandoori", 179],
+            ["Mint", 179],
+            ["Truffle", 179],
+            ["Roasted", 189],
+            ["Paneer", 189],
+            ["TFC Special", 239],
+          ],
+        ],
+        [
+          "🍕 Pizza S/M/L",
+          [
+            ["Margherita", [99, 109, 139]],
+            ["Cheese", [109, 149, 179]],
+            ["OTC", [139, 159, 199]],
+            ["Paneer", [219, 259, 299]],
+          ],
+        ],
+        [
+          "🍝 Pasta S/M/L",
+          [
+            ["Red Pasta", [139, 149, 159]],
+            ["White Pasta", [139, 149, 159]],
+            ["Pink Pasta", [139, 149, 159]],
+          ],
+        ],
+        ["🍵 Tea", [["Regular Chai", 35]]],
+        [
+          "🧋 Shakes S/M/L",
+          [
+            ["Oreo", [89, 109, 129]],
+            ["KitKat", [89, 109, 129]],
+            ["Vanilla", [59, 79, 99]],
+            ["Strawberry", [59, 79, 99]],
+            ["Pineapple", [59, 79, 99]],
+            ["Chocolate", [69, 89, 109]],
+            ["Butterscotch", [69, 89, 109]],
+            ["Black Currant", [79, 99, 119]],
+            ["Kesar", [79, 99, 119]],
+            ["Paan", [79, 99, 119]],
+            ["TFC Special", [99, 119, 149]],
+          ],
+        ],
+        [
+          "🧊 Cold Coffee S/M/L",
+          [
+            ["Cold Coffee", [49, 69, 89]],
+            ["Chocolate Coffee", [69, 89, 109]],
+            ["Choco Cold Coffee", [59, 79, 99]],
+            ["Vanilla Cold Coffee", [69, 89, 109]],
+            ["TFC Special Coffee", [89, 99, 129]],
+          ],
+        ],
+        [
+          "🎁 Combos",
+          [
+            ["Mini Cold Coffee + Fries", 99],
+            ["Fries + Veg Sandwich", 169],
+            ["Fried Rice + Gravy Manchurian", 199],
+            ["OTC Pizza + Crunchy Roll", 179],
+            ["White Pasta + Fried Momos", 169],
+            ["Chilli Paneer + Singapuri Rice", 249],
+          ],
+        ],
+      ];
+
+      let cart = {},
+        total = 0;
+      const cat = document.getElementById("cat");
+      const menu = document.getElementById("menu");
+
+      /* build menu */
+      MENU.forEach((c, i) => {
+        let id = "c" + i;
+        cat.innerHTML += `<button onclick="show('${id}', this)">${c[0]}</button>`;
+        let h = `<div class="sec" id="${id}"><div class="t">${c[0]}</div>`;
+        c[1].forEach((it) => {
+          if (Array.isArray(it[1])) {
+            h += `<div class="i">${it[0]}
+<div class="q">
+<button onclick="add('${it[0]} S',${it[1][0]})">S ₹${it[1][0]}</button>
+<button onclick="add('${it[0]} M',${it[1][1]})">M ₹${it[1][1]}</button>
+<button onclick="add('${it[0]} L',${it[1][2]})">L ₹${it[1][2]}</button>
+</div></div>`;
+          } else {
+            h += `<div class="i">${it[0]} ₹${it[1]}
+<div class="q">
+<button onclick="add('${it[0]}',${it[1]})">+</button>
+</div></div>`;
+          }
+        });
+        menu.innerHTML += h + "</div>";
+      });
+
+     function show(id, btn) {
+  document.getElementById("welcome").style.display = "none";
+
+  document.querySelectorAll(".sec")
+    .forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".cat button")
+    .forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+      function wa() {
+        alertUser();
+        let t = document.getElementById("table").value;
+        if (!t || !total) return alert("Select table & items");
+        let m = `${t}\n`;
+        for (let i in cart) m += `${i} x${cart[i]}\n`;
+        m += `Total ₹${total}`;
+        window.open(`https://wa.me/919257480019?text=${encodeURIComponent(m)}`);
+      }
+
+      function surprise() {
+        alertUser();
+        window.open(
+          "https://lr2938650-svg.github.io/Aapka-bhai-suprise/",
+          "_blank"
+        );
+      }
+
+   function add(n, p) {
+  if (!document.getElementById("table").value) {
+    alert("Please select table first");
+    return;
+  }
+
+  cart[n] = (cart[n] || 0) + 1;
+  total += p;
+  document.getElementById("total").innerText = "₹" + total;
+
+  let ci = "";
+  for (let i in cart) ci += `${i} x${cart[i]}<br>`;
+  document.getElementById("cartItems").innerHTML = ci;
+
+  alertUser();
+}
+
+
+
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js');
+}
+
+
+
+    </script>
+  </body>
+</html>
